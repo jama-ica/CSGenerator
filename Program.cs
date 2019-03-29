@@ -50,12 +50,7 @@ namespace CSGen
 				Console.WriteLine("!arg = string.Empty");
 				return;
 			}
-			string[] splitedText = arg.Split('/');
-			string namespaceName = splitedText[0];
-			string className = splitedText[splitedText.Length - 1];
-			string rootPath = @"./output";
-			string path = rootPath + "/" + arg + ".cs";
-			bool ret = CSClass.gen(path, namespaceName, className);
+			bool ret = CSClass.gen(arg);
 			if(!ret){
 				Console.WriteLine("!Faild");
 			}
@@ -63,7 +58,19 @@ namespace CSGen
 
 		static void CreateProject(string arg)
 		{
-
+			if(arg == null){
+				Console.WriteLine("!arg = null");
+				return;
+			}
+			if(arg == string.Empty){
+				Console.WriteLine("!arg = string.Empty");
+				return;
+			}
+			string filePath = arg;
+			bool ret = CSProject.gen(filePath);
+			if(!ret){
+				Console.WriteLine("!Faild");
+			}
 		}
 	}
 }

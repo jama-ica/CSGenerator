@@ -17,8 +17,13 @@ namespace CSGen
 		{
 		}
 
-		public static bool gen(string path, string namespaceName, string className)
+		public static bool gen(string arg)
 		{
+			string[] splitedText = arg.Split('/');
+			string namespaceName = splitedText[0];
+			string className = splitedText[splitedText.Length - 1];
+			string rootPath = @"./output";
+			string path = rootPath + "/" + arg + ".cs";
 			return instance.generateClassFile(path, namespaceName, className);
 		}
 
@@ -45,8 +50,7 @@ namespace CSGen
 
 		private string createClassText(string namespaceName, string className)
 		{
-			var text = $@"
-using System;
+			var text = $@"using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
